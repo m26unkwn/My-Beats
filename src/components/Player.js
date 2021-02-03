@@ -9,12 +9,12 @@ export const Player = () => {
                 <p>start Time</p>
                 <input type="Range"/>
                 <p>End Time</p>
-                <div className='play-control'>
-                    < FontAwesomeIcon className="skip-back" icon={faAngleLeft} />
-                    <FontAwesomeIcon className="play" icon={faPlay} />
-                    < FontAwesomeIcon className ="skip-forward" icon={faAngleRight} />
-                </div>
             </div>
+            <div className='play-control'>
+                    < FontAwesomeIcon className="skip-back" size="2x" icon={faAngleLeft} />
+                    <FontAwesomeIcon className="play"  size="2x" icon={faPlay} />
+                    < FontAwesomeIcon className ="skip-forward" size="2x" icon={faAngleRight} />
+                </div>
         </div>
     )
 }
