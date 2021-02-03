@@ -1,7 +1,7 @@
 .Library{
     position: fixed;
     top: 0;
-    left: 0;
+    right: 0;
     width: 20rem;
     height: 100%;
     background:lightcyan;
@@ -21,6 +21,7 @@
     padding: 1rem 2rem 1rem 2rem;
     img{
         width: 30%;
+        border-radius: 50%;
     }
     &:hover{
         background: rgb(206, 235, 245);
@@ -52,3 +53,6 @@
     border:transparent;
 }
 
+.selected{
+    background: rgb(206, 235, 245);
+}

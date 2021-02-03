@@ -23,5 +23,7 @@
     align-items: center;
     padding: 1rem;
     width: 30%;
+    .skip-back,.play,.skip-forward{
     cursor: pointer;
+    }
 }
