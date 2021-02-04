@@ -4,10 +4,11 @@ import {useState,useRef} from "react";
 // Adding Components
 import {Song} from "./components/Song";
 import {Player} from "./components/Player";
+import {Nav} from "./components/Nav";
 
 //Import Util
 
-import  chillhop from "./util";
+import  chillhop from "./data";
 
 import "./styles/style.scss";
 
@@ -23,7 +24,12 @@ const [songs, setSongs] = useState(chillhop());
 const [currentSong, setCurrentSong] = useState(songs[0]);
 const [isPlaying, setIsPlaying] = useState(false);
  //State
- const [songInfo, setSongInfo] = useState({currentTime: 0, duration: 0});
+ const [songInfo, setSongInfo] = useState(
+   {currentTime: 0,
+     duration: 0,
+     animationPercentnge:0,
+    });
+ const [libraryStatus, setLibraryStatus] = useState(false);
 
 //TimeUpdateHandler 
 const timeUpdateHandler=(e)=>{
@@ -31,13 +37,21 @@ const timeUpdateHandler=(e)=>{
 
   const duration=e.target.duration;
 
-  setSongInfo({...songInfo, currentTime : current,duration});
+  //Calculate Percentage
+  const roundedCurrent=Math.round(current);
+  const roundedDuration=Math.round(duration);
+  const animation= Math.round((roundedCurrent/ roundedDuration) * 100);
+  console.log(animation);
+
+
+  setSongInfo({...songInfo, currentTime : current,duration, animationPercentnge:animation});
 
 }
 
 
   return (
     <div className="App">
+      < Nav libraryStatus= {libraryStatus} setLibraryStatus= {setLibraryStatus} />
       < Song currentSong={currentSong} />
       <Player
       setSongInfo={setSongInfo}
@@ -46,6 +60,10 @@ const timeUpdateHandler=(e)=>{
       setIsPlaying={setIsPlaying}
       isPlaying={isPlaying}
       currentSong={currentSong}
+      setCurrentSong={setCurrentSong}
+      songs={songs}
+      setSongs={setSongs}
+
        />
        <Library 
        songs={songs} 
@@ -53,8 +71,10 @@ const timeUpdateHandler=(e)=>{
        audioRef={audioRef}
        isPlaying={isPlaying}
        setSongs={setSongs}
+       libraryStatus= {libraryStatus}
        />
-       <audio onTimeUpdate={timeUpdateHandler}
+       <audio
+        onTimeUpdate={timeUpdateHandler}
         onLoadedMetadata={timeUpdateHandler}
         ref={audioRef}src={currentSong.audio}>
         </audio>

@@ -1,5 +1,7 @@
 import React from 'react'
 
+import {playAudio} from "../util";
+
 export default function LibrarySong({song, songs, setCurrentSong, id,audioRef, isPlaying, setSongs}) {
     //SongSelecterhandler
     const songSelecterHandler=()=>{
@@ -8,7 +10,7 @@ export default function LibrarySong({song, songs, setCurrentSong, id,audioRef, i
 
         //SONG ACTIVE OR NOT
         const newSong= songs.map((song)=> {
-            if(song.id==id){
+            if(song.id===id){
                 return {
                     ...song, active:true,
                 }
@@ -22,15 +24,7 @@ export default function LibrarySong({song, songs, setCurrentSong, id,audioRef, i
         setSongs(newSong);
         //Promises
 
-        if(isPlaying){
-            const playPromise=audioRef.current.play();
-            if (playPromise!== undefined)
-            {
-                playPromise.then((audio)=>{
-                    audioRef.current.play()
-                })
-            }
-        }
+        playAudio(isPlaying, audioRef);
         
     }
 
